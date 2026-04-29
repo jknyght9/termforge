@@ -1,0 +1,57 @@
+# Termforge Starship Config — Clean single-line prompt for article recordings
+# Produces: analyst@forensics-lab ~ $
+
+format = """${env_var.USER}$hostname$directory$git_branch$character"""
+add_newline = false
+
+[env_var.USER]
+style = "bold green"
+format = "[$env_value]($style)"
+
+[username]
+disabled = true
+
+[hostname]
+ssh_only = false
+style = "bold green"
+format = "[@$hostname]($style)"
+
+[directory]
+style = "bold cyan"
+format = " [$path]($style) "
+truncation_length = 3
+truncate_to_repo = false
+
+[character]
+success_symbol = "[\\$](bold green)"
+error_symbol = "[\\$](bold red)"
+
+[git_branch]
+format = "[$branch]($style) "
+style = "bold purple"
+
+# Disable everything else
+[git_status]
+disabled = true
+[aws]
+disabled = true
+[gcloud]
+disabled = true
+[package]
+disabled = true
+[nodejs]
+disabled = true
+[python]
+disabled = true
+[ruby]
+disabled = true
+[rust]
+disabled = true
+[docker_context]
+disabled = true
+[cmd_duration]
+disabled = true
+[line_break]
+disabled = true
+[time]
+disabled = true

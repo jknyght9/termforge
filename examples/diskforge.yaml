@@ -1,0 +1,66 @@
+# Termforge manifest for DiskForge article recordings
+#
+# Pre-build first:  bash examples/diskforge-prebuild.sh
+# Then record:      ./record.sh examples/diskforge.yaml ../diskforge/assets/recordings/ --data prebuild-diskforge
+
+session:
+  hostname: forensics-lab
+  username: analyst
+  working_dir: /home/analyst
+  packages:
+    - file
+    - fdisk
+    - sleuthkit
+    - xxd
+  terminal:
+    cols: 120
+    rows: 30
+  typing:
+    char_delay_ms: 40
+    pre_enter_ms: 300
+    post_output_ms: 200
+    end_pause_ms: 2000
+  gif:
+    font_size: 14
+    theme: nord
+
+commands:
+  - name: view-manifest
+    description: "Examine the GPT example manifest"
+    command: "bat diskforge/examples/example_gpt/manifest.json"
+
+  - name: inspect-gpt
+    description: "Inspect the GPT disk image partition table"
+    command: "mmls output/training_gpt.img"
+
+  - name: view-vbr-gpt
+    description: "View the VBR of the first partition from GPT image"
+    command: "xxd -g 1 -l 512 -s (math 2048 x 512) output/training_gpt.img | /app/scripts/auto-scroll.sh"
+
+  - name: inspect-mbr
+    description: "Inspect the MBR disk image with boot code and logical partitions"
+    command: "mmls output/training_mbr.img"
+
+  - name: view-vbr-mbr
+    description: "View the VBR of the second partition from MBR image"
+    command: "xxd -g 1 -l 512 -s (math 206848 x 512) output/training_mbr.img | /app/scripts/auto-scroll.sh"
+  
+  - name: inspect-raw
+    description: "Inspect raw type disks"
+    command: "fsstat output/training_raw.img | /app/scripts/auto-scroll.sh"
+
+  - name: view-vbr-raw
+    description: "View the VBR of the first partition from RAW image"
+    command: "xxd -g 1 -l 512 output/training_raw.img | /app/scripts/auto-scroll.sh"
+
+  - name: view-template
+    description: "View the Windows 10 OS template definition"
+    command: "bat diskforge/templates/windows10.json"
+
+  - name: strings-inject
+    description: "Search for hidden data injected into unallocated space"
+    command: "strings output/training_inject.img | grep -i 'secret\\|password\\|key\\|bitlocker'"
+
+  - name: view-test-results
+    description: "Review the DiskForge test suite results"
+    command: "bat test-results.txt"
