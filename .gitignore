@@ -6,3 +6,6 @@ test-output/
 
 # Test files
 test.yaml
+
+# AI context (not for end users)
+CLAUDE.md
