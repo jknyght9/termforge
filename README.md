@@ -1,4 +1,4 @@
-[TermForge](./media/termforge.png)
+![TermForge](./media/termforge.png)
 
 # TermForge
 
