@@ -1,8 +1,10 @@
-# Termforge
+[TermForge](./media/termforge.png)
 
-**Termforge** is a Dockerized terminal recording engine that produces standardized, sterilized GIF recordings for embedding in articles, documentation, and tutorials.
+# TermForge
 
-Define your commands in a YAML manifest — Termforge types them out character-by-character in a clean Fish shell with a Starship prompt, captures the output with asciinema, and exports animated GIFs with [agg](https://github.com/asciinema/agg).
+**TermForge** is a Dockerized terminal recording engine that produces standardized, sterilized GIF recordings for embedding in articles, documentation, and tutorials.
+
+Define your commands in a YAML manifest — TermForge types them out character-by-character in a clean Fish shell with a Starship prompt, captures the output with asciinema, and exports animated GIFs with [agg](https://github.com/asciinema/agg).
 
 ---
 
@@ -41,7 +43,7 @@ session:
 commands:
   - name: hello-world
     description: "Test basic output"
-    command: "echo 'Hello from Termforge!'"
+    command: "echo 'Hello from TermForge!'"
 
   - name: system-info
     description: "Show system information"
@@ -124,7 +126,7 @@ commands:
 
 ## Using `bat` for File Viewing
 
-Termforge includes [bat](https://github.com/sharkdp/bat) as a `cat` replacement with syntax highlighting, line numbers, and grid borders. A custom auto-scroll pager outputs content line-by-line instead of dumping everything at once or waiting for keyboard input.
+TermForge includes [bat](https://github.com/sharkdp/bat) as a `cat` replacement with syntax highlighting, line numbers, and grid borders. A custom auto-scroll pager outputs content line-by-line instead of dumping everything at once or waiting for keyboard input.
 
 ```yaml
   - name: view-config
@@ -164,7 +166,7 @@ For commands that need to run Docker (e.g., building images), pass the `--docker
 ./record.sh commands.yaml ./output/ --docker
 ```
 
-**Limitation:** Docker commands that use volume mounts (`-v`) will fail because the paths inside the Termforge container don't exist on the host. For scenarios that need volume mounts, pre-build the artifacts and use `--data` instead.
+**Limitation:** Docker commands that use volume mounts (`-v`) will fail because the paths inside the TermForge container don't exist on the host. For scenarios that need volume mounts, pre-build the artifacts and use `--data` instead.
 
 ---
 
